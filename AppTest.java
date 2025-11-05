@@ -9,6 +9,6 @@ public class AppTest {
     void testGetMessage() {
         String expected = "✅ Hello from Maven + GitHub Actions!";
         String actual = App.getMessage();
-        assertEquals(expected, actual, "Message should match expected text")
+        assertEquals(expected, actual, "Message should match expected text");
     }
 }
