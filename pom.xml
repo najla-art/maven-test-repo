@@ -69,7 +69,7 @@
         </plugins>
     </build>
 
-    <!-- Updated Distribution Management for GitHub Packages -->
+    <!-- ✅ Correct Distribution Management for GitHub Packages -->
     <distributionManagement>
         <repository>
             <id>github</id>
