@@ -1,1 +1,10 @@
 
+<settings>
+  <servers>
+    <server>
+      <id>github</id>
+      <username>${env.USER_NAME}</username>
+      <password>${env.PASSWORD}</password>
+    </server>
+  </servers>
+</settings>
