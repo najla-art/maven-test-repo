@@ -1,33 +1,30 @@
-name: Java CI with Maven
+name: Maven Deploy
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    permissions:
+      contents: read
+      packages: write   # ✅ required for pushing to GitHub Packages
 
-      - name: Set up JDK 17
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: maven
+          server-id: github
+          settings-path: .github/workflows
+          server-username: USER_NAME
+          server-password: PASSWORD
 
-      - name: Build and run unit tests
-        run: mvn --batch-mode clean package --file pom.xml
-
-      - name: List generated artifacts
-        run: ls -lh target
-
-      - name: Publish package to GitHub Packages
-        env:
-          GITHUB_ACTOR: ${{ secrets.USER_NAME }}
-          GITHUB_TOKEN: ${{ secrets.PASSWORD }}
+      - name: Build and Deploy
         run: mvn --batch-mode deploy --settings .github/workflows/settings.xml
